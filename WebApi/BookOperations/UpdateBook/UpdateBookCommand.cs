@@ -22,12 +22,16 @@ namespace WebApi.BookOperations.UpdateBook{
       if(book is null)
         throw new InvalidOperationException("Böyle Bir ID'ye sahip kitap yok!");
       
-      book.Title = Model.Title != default ? Model.Title : book.Title;
-      book.GenreId = Model.GenreId != default ? Model.GenreId : book.GenreId;
+      //withmapper
+      book = _mapper.Map(Model,book);
+      _dbContext.SaveChanges();
+
+      // withoutmapper
+      // book.Title = Model.Title != default ? Model.Title : book.Title;
+      // book.GenreId = Model.GenreId != default ? Model.GenreId : book.GenreId;
       // book.PageCount = Model.PageCount != default ? Model.PageCount : book.PageCount;
       // book.PublishDate = Model.PublishDate != default ? Model.PublishDate : book.PublishDate;
        _dbContext.SaveChanges();
-      
     }
 
     public class UpdateBookModel
