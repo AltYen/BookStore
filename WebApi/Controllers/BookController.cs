@@ -1,7 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using AutoMapper;
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.BookOperations.CreateBook;
 using WebApi.BookOperations.DeleteBook;
@@ -44,7 +44,9 @@ namespace WebApi.AddControllers
       try
       {
         GetBookDetailQuery query = new GetBookDetailQuery(_context,_mapper);
+        GetBookDetailQueryValidator validator = new GetBookDetailQueryValidator();
         query.BookId = id;
+        validator.ValidateAndThrow(query);
         result=query.Handle();
       }
       catch(Exception ex)
@@ -68,7 +70,18 @@ namespace WebApi.AddControllers
       try
       {
         command.Model = newBook;
+        CreateBookCommandValidator validator = new CreateBookCommandValidator();
+        validator.ValidateAndThrow(command);
         command.Handle();
+
+        // if(!result.IsValid)
+        // {
+        //   foreach(var item in result.Errors){
+        //     Console.WriteLine("Property : " + item.PropertyName + " - Error Message : " + item.ErrorMessage);
+        //   }
+        // }else{
+        //   command.Handle();
+        // }
       }
       catch(Exception ex)
       {
@@ -84,8 +97,10 @@ namespace WebApi.AddControllers
       try
       {
         UpdateBookCommand command = new UpdateBookCommand(_context,_mapper);
+        UpdateBookCommandValidator validator = new UpdateBookCommandValidator();
         command.BookId = id;
         command.Model = updatedBook;
+        validator.ValidateAndThrow(command);
         command.Handle();
       }catch(Exception ex){
         return BadRequest(ex.Message);
@@ -98,7 +113,9 @@ namespace WebApi.AddControllers
       try
       {
         DeleteBookCommand command = new DeleteBookCommand(_context);
+        DeleteBookCommandValidator validator = new DeleteBookCommandValidator();
         command.BookId = id;
+        validator.ValidateAndThrow(command);
         command.Handle();
       }
       catch(Exception ex)
