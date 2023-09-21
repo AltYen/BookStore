@@ -3,7 +3,7 @@ using System.Linq;
 using AutoMapper;
 using WebApi.DBOperations;
 
-namespace WebApi.BookOperations.UpdateBook{
+namespace WebApi.Application.BookOperations.UpdateBook{
   public class UpdateBookCommand{
     public int BookId { get; set; }
     public UpdateBookModel Model { get; set; }

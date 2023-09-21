@@ -6,7 +6,7 @@ using WebApi.Common;
 using WebApi.DBOperations;
 using WebApi.Entities;
 
-namespace WebApi.BookOperations.GetBooks
+namespace WebApi.Application.BookOperations.GetBooks
 {
   public class GetBooksQuery{
 

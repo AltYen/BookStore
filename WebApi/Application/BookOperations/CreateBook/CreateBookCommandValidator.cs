@@ -3,7 +3,7 @@ using FluentValidation;
 using FluentValidation.Validators;
 using WebApi.Common;
 
-namespace WebApi.BookOperations.CreateBook
+namespace  WebApi.Application.BookOperations.CreateBook
 {
   public class CreateBookCommandValidator : AbstractValidator<CreateBookCommand> // CreateBookCommand'in objelerini,nesnelerini validate eder.
   {
