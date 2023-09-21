@@ -65,7 +65,7 @@ namespace WebApi.AddControllers
       CreateBookCommand command = new CreateBookCommand(_context, _mapper);
 
       command.Model = newBook;
-      CreateBookCommandValidator validator = new CreateBookCommandValidator();
+      CreateBookCommandValidator validator = new CreateBookCommandValidator(_context);
       validator.ValidateAndThrow(command);
       command.Handle();
 
@@ -86,7 +86,7 @@ namespace WebApi.AddControllers
     {
 
       UpdateBookCommand command = new UpdateBookCommand(_context, _mapper);
-      UpdateBookCommandValidator validator = new UpdateBookCommandValidator();
+      UpdateBookCommandValidator validator = new UpdateBookCommandValidator(_context);
       command.BookId = id;
       command.Model = updatedBook;
       validator.ValidateAndThrow(command);
