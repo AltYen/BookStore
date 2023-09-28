@@ -14,6 +14,7 @@ namespace WebApi.Application.BookOperations.UpdateBook
       RuleFor(command=>command.BookId).GreaterThan(0);
       RuleFor(command=>command.Model.Title).NotEmpty().MinimumLength(4);
       RuleFor(command=>command.Model.GenreId).Must(genreId => context.Genres.Any(g => g.Id == genreId)).WithMessage("Geçersiz GenreId. Lütfen mevcut bir GenreId girin.");
+      RuleFor(command => command.Model.AuthorId).Must(authorId => context.Authors.Any(a => a.Id == authorId)).WithMessage("Geçersiz AuthorId. Lütfen mevcut bir AuthorId girin.");
     }
   }
 }

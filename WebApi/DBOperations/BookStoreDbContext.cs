@@ -11,7 +11,7 @@ namespace WebApi.DBOperations{
     // bu context'e Book entitysini eklemiş olduk. Books ismiyle o entitiyin her şeyine erişebiliriz
     public DbSet<Book> Books { get;set;} // Buradaki Book, DBdeki Books objesinin bir replikası.
     public DbSet<Genre> Genres { get;set;}
-
+    public DbSet<Author> Authors {get;set;}
     
   }
 
