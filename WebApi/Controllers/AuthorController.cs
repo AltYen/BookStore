@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Application.AuthorOperations.Command.CreateAuthor;
+using WebApi.Application.AuthorOperations.Command.DeleteAuthor;
+using WebApi.Application.AuthorOperations.Command.UpdateAuthor;
 using WebApi.Application.AuthorOperations.Queries.GetAuthorDetail;
 using WebApi.Application.AuthorOperations.Queries.GetAuthors;
 using WebApi.DBOperations;
@@ -43,6 +46,45 @@ namespace WebApi.Controllers
 
             var obj = query.Handle();
             return Ok(obj);
+        }
+
+        [HttpPost]
+        public IActionResult AddAuthor([FromBody] CreateAuthorModel newAuthor)
+        {
+            CreateAuthorCommand command = new CreateAuthorCommand(_context, _mapper);
+
+            command.Model = newAuthor;
+            CreateAuthorCommandValidator validator = new CreateAuthorCommandValidator();
+            validator.ValidateAndThrow(command);
+            command.Handle();
+            return Ok();
+        }
+
+        [HttpPut("id")]
+        public IActionResult UpdateAuthor(int id, [FromBody] UpdateAuthorModel updateAuthor)
+        {
+            UpdateAuthorCommand command = new UpdateAuthorCommand(_context, _mapper);
+            command.AuthorId = id;
+            command.Model = updateAuthor;
+
+            UpdateAuthorCommandValidator validator = new UpdateAuthorCommandValidator();
+            validator.ValidateAndThrow(command);
+
+            command.Handle();
+            return Ok();
+        }
+
+        [HttpDelete("id")]
+        public IActionResult DeleteAuthor(int id)
+        {
+            DeleteAuthorCommand command = new DeleteAuthorCommand(_context);
+            command.AuthorId = id;
+
+            DeleteAuthorCommandValidator validator = new DeleteAuthorCommandValidator();
+            validator.ValidateAndThrow(command);
+
+            command.Handle();
+            return Ok();
         }
     }
 }
