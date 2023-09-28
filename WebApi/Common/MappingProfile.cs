@@ -1,4 +1,6 @@
 using AutoMapper;
+using WebApi.Application.AuthorOperations.Queries.GetAuthorDetail;
+using WebApi.Application.AuthorOperations.Queries.GetAuthors;
 using WebApi.Application.BookOperations.GetBooks;
 using WebApi.Application.GenreOperations.Queries.GetGenreDetail;
 using WebApi.Application.GenreOperations.Queries.GetGenres;
@@ -20,6 +22,9 @@ namespace WebApi.Common
       
       CreateMap<Genre,GenresViewModel>(); // Genre'yi GenresViewModel'e dönüştür.
       CreateMap<Genre,GenreDetailViewModel>();
+
+      CreateMap<Author,AuthorsViewModel>();
+      CreateMap<Author,AuthorDetailViewModel>();
     }
   }
 }
