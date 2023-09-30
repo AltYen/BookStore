@@ -22,9 +22,9 @@ namespace WebApi.AddControllers
   public class BookController : ControllerBase
   {
     //readonly dosyalar sadece constructor içerisinde set edilebilirler.
-    private readonly BookStoreDbContext _context;
+    private readonly IBookStoreDbContext _context;
     private readonly IMapper _mapper;
-    public BookController(BookStoreDbContext context, IMapper mapper)
+    public BookController(IBookStoreDbContext context, IMapper mapper)
     {
       _context = context; // inject edilen instance'i atadık.
       _mapper = mapper;

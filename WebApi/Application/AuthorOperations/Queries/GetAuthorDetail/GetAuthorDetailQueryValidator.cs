@@ -9,7 +9,7 @@ namespace WebApi.Application.AuthorOperations.Queries.GetAuthorDetail
 {
     public class GetAuthorDetailQueryValidator : AbstractValidator<GetAuthorDetailQuery>
     {
-        public GetAuthorDetailQueryValidator(BookStoreDbContext context)
+        public GetAuthorDetailQueryValidator(IBookStoreDbContext context)
         {
             RuleFor(x => x.AuthorId).Must(authorId=>context.Authors.Any(a=>a.Id == authorId)).WithMessage("Geçersiz AuthorId. Lütfen mevcut bir AuthorId girin.");
         }

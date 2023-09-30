@@ -38,6 +38,7 @@ namespace WebApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApi", Version = "v1" });
             });
             services.AddDbContext<BookStoreDbContext>(options => options.UseInMemoryDatabase(databaseName: "BookStorDB"));
+            services.AddScoped<IBookStoreDbContext>(provider=>provider.GetService<BookStoreDbContext>()); //request life time sürecinde yaşar. request bittiği anda yok edilir.
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddSingleton<ILoggerService,ConsoleLogger>(); // interface,interfaci alan sınıf ILoggerService çağrıldığında ConsoleLogger çalışsın.
         }

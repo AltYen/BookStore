@@ -9,7 +9,7 @@ namespace WebApi.Application.BookOperations.CreateBook
 {
   public class CreateBookCommandValidator : AbstractValidator<CreateBookCommand> // CreateBookCommand'in objelerini,nesnelerini validate eder.
   {
-    public CreateBookCommandValidator(BookStoreDbContext context)
+    public CreateBookCommandValidator(IBookStoreDbContext context)
     {
       RuleFor(command => command.Model.GenreId).Must(genreId => context.Genres.Any(g => g.Id == genreId)).WithMessage("Geçersiz GenreId. Lütfen mevcut bir GenreId girin.");
       RuleFor(command => command.Model.AuthorId).Must(authorId => context.Authors.Any(a => a.Id == authorId)).WithMessage("Geçersiz AuthorId. Lütfen mevcut bir AuthorId girin.");

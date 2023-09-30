@@ -9,7 +9,7 @@ namespace WebApi.Application.BookOperations.UpdateBook
 {
   public class UpdateBookCommandValidator : AbstractValidator<UpdateBookCommand>
   {
-    public UpdateBookCommandValidator(BookStoreDbContext context)
+    public UpdateBookCommandValidator(IBookStoreDbContext context)
     {
       RuleFor(command=>command.BookId).GreaterThan(0);
       RuleFor(command=>command.Model.Title).NotEmpty().MinimumLength(4);
