@@ -22,6 +22,8 @@ namespace WebApi.Application.AuthorOperations.Queries.GetAuthorDetail
         public AuthorDetailViewModel Handle()
         {
             var author = _context.Authors.SingleOrDefault(a => a.Id == AuthorId);
+            if (author is null)
+                throw new InvalidOperationException("Yazar Bulunamadı!");
             AuthorDetailViewModel returnObj = _mapper.Map<AuthorDetailViewModel>(author);
             return returnObj;
         }

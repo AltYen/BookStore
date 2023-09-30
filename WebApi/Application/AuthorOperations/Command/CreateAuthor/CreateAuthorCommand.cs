@@ -22,7 +22,7 @@ namespace WebApi.Application.AuthorOperations.Command.CreateAuthor
 
         public void Handle()
         {
-            var author = _context.Authors.SingleOrDefault(x => x.Name == Model.Name);
+            var author = _context.Authors.SingleOrDefault(x => x.Name == Model.Name && x.Surname == Model.Surname);
             if (author is not null)
                 throw new InvalidOperationException("Yazar Zaten Mevcut!");
 
